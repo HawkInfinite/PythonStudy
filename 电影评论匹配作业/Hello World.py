@@ -13,7 +13,7 @@ def match(pathOfTxt):
             line = line.strip('\n')    #去除\n
             Dict.append((line, 0))
 
-#麻烦师兄/师姐自己改下路径啦= =
+#麻烦帅气的师兄/漂亮的师姐自己改下路径啦= =
 match('/home/infinite/Downloads/2017数据挖掘作业/week2 Python 作业/作业/词典/角色/反派.txt')
 match('/home/infinite/Downloads/2017数据挖掘作业/week2 Python 作业/作业/词典/角色/角色.txt')
 match('/home/infinite/Downloads/2017数据挖掘作业/week2 Python 作业/作业/词典/角色/角色中的其它.txt')
@@ -44,16 +44,19 @@ match('/home/infinite/Downloads/2017数据挖掘作业/week2 Python 作业/作�
 with codecs.open('/home/infinite/Downloads/2017数据挖掘作业/week2 Python 作业/作业/太空旅店.txt', 'r', 'utf-8') as filein:
     for line in filein.readlines():
         line.strip('\n')
-        lines += line
+        lines += line[28:len(line)-1]
 
-ItemsDict = dict(Dict)
-words = jieba.cut(lines)
-fileOu = codecs.open('/home/infinite/my_github/PythonStudy/匹配结果.txt', 'w', 'utf-8')
+ItemsDict = dict(Dict)      #初始化词典
+words = jieba.cut(lines)    #对评论分词
+OutPutFile = codecs.open('/home/infinite/my_github/PythonStudy/电影评论匹配作业/匹配结果.txt', 'w', 'utf-8')
 
-for word in words:
+for word in words:   #进行分词并匹配
     if word in ItemsDict.keys():
         ItemsDict[word] += 1
 
 for k in ItemsDict.keys():
-    ou = k + ' ' + str(ItemsDict[k]) + '\n'
-    fileOu.write(ou)
+    if k == "" or k == " ":
+        continue
+    else:
+        results = k + ' ' + str(ItemsDict[k]) + '\n'
+        OutPutFile.write(results)
