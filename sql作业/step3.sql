@@ -11,10 +11,9 @@ where T1.dept_name = 'computer'
 group by name;
 -- 3-3.查找女学霸（考试平均分达到80分或80分以上的女生的姓名, 分数）。
 select name,avg(grade)
-from student as T1 
-inner join department on T1.dept_name = department.dept_name 
+from student
 inner join exam on T1.ID = exam.student_ID 
-where T1.sex = 'f' group by name having avg(grade) >= 80;
+where sex = 'f' group by name having avg(grade) >= 80;
 select name,grade from student where exam.grade >= 80 and sex = 'f';
 -- 3-4.找出人数最少的院系以及其年度预算。
 select distinct department.dept_name,budget,count(*)
